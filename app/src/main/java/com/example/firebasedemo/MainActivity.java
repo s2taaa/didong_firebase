@@ -32,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getString(R.string.app_name));
-        setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
+                oldEmail.setVisibility(View.VISIBLE);
                 newEmail.setVisibility(View.VISIBLE);
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
@@ -112,11 +109,10 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(MainActivity.this, "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
                                         signOut();
-                                        progressBar.setVisibility(View.GONE);
                                     } else {
                                         Toast.makeText(MainActivity.this, "Failed to update email!", Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.GONE);
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
                 } else if (newEmail.getText().toString().trim().equals("")) {
@@ -131,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
+                password.setVisibility(View.VISIBLE);
                 newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.VISIBLE);
@@ -156,11 +152,10 @@ public class MainActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(MainActivity.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
                                             signOut();
-                                            progressBar.setVisibility(View.GONE);
                                         } else {
                                             Toast.makeText(MainActivity.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
-                                            progressBar.setVisibility(View.GONE);
                                         }
+                                        progressBar.setVisibility(View.GONE);
                                     }
                                 });
                     }
@@ -196,11 +191,10 @@ public class MainActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(MainActivity.this, "Reset password email is sent!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
                                     } else {
                                         Toast.makeText(MainActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
                 } else {
@@ -223,11 +217,10 @@ public class MainActivity extends AppCompatActivity {
                                         Toast.makeText(MainActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, SignupActivity.class));
                                         finish();
-                                        progressBar.setVisibility(View.GONE);
                                     } else {
                                         Toast.makeText(MainActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
                 }
